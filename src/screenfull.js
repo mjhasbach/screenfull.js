@@ -2,6 +2,7 @@
 	'use strict';
 
 	var isCommonjs = typeof module !== 'undefined' && module.exports;
+    	var isAMD = typeof define == 'function' && typeof define.amd == 'object';
 	var keyboardAllowed = typeof Element !== 'undefined' && 'ALLOW_KEYBOARD_INPUT' in Element;
 
 	var fn = (function () {
@@ -144,7 +145,9 @@
 
 	if (isCommonjs) {
 		module.exports = screenfull;
-	} else {
+    	} else if (isAMD) {
+        	define(screenfull);
+    	} else {
 		window.screenfull = screenfull;
 	}
 })();
